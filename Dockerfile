@@ -23,6 +23,8 @@ RUN chown -R container:container /home/container
 
 # Repasser à l'utilisateur non privilégié
 USER container
+ENV  USER=container HOME=/home/container
 
+ADD ./entrypoint.sh /entrypoint.sh
 # Commande par défaut pour démarrer Nginx (sera remplacée par la commande de démarrage de Pterodactyl)
-CMD ["/bin/bash", "-c", "echo 'Container started' && sleep infinity"]
+CMD ["/bin/bash", "/entrypoint.sh"]
